@@ -20,6 +20,7 @@ class Gen3Client(HTTPClient):
 
         super().__init__(endpoint, auth_helper)
 
+    # Possible duplicate in self.submission
     def dictionary(self):
         if self.dict == None:
             self.dict = self.authd_get(
@@ -27,6 +28,7 @@ class Gen3Client(HTTPClient):
             ).json()
         return self.dict
     
+    # Possible duplicate in self.submission
     def query(self, graphql, g_vars = None):
         return self.authd_post(
             "/api/v0/submission/graphql/",
