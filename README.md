@@ -46,12 +46,27 @@ client = Gen3Client(
 # Fetch projects
 projects = client.fetch_projects(limit=1000, offset=0)
 
-# Fetch GUID by S3 URI
+# Fetch object GUID by S3 URI
 guid = client.get_guid_by_s3_uri("s3://my-bucket/my-obj.txt")
+
+## INFO: 
+# Access instantiated class 'gen3.submission.Gen3Submission' via 'client.submission'
+# https://gen3sdk-python.readthedocs.io/en/latest/submission.html
+#
+# Access instantiated class 'gen3.file.Gen3File' via 'client.file'
+# https://gen3sdk-python.readthedocs.io/en/latest/file.html
+
+
+# Create a generic submission, see create_project example below for json_dict example of a project node
+client.submission.submit_record(json_dict)
+
+# Fetch the presigned AWS S3 URL for downloading data via GUID
+download_url = client.file.get_presigned_url("dg.XXXX/e8dd1662-25d8-4c94-87f9-4c3d0e8d16e4")
 
 # Create project
 # https://gen3sdk-python.readthedocs.io/en/latest/submission.html
 client.submission.create_project("bms_open", {
+    "type": "project",
     "availability_type": "Restricted",
     "collaborators": [],
     "data_provider": "ABI",
@@ -65,17 +80,7 @@ client.submission.create_project("bms_open", {
     "project_type": "Non Clinical",
     "therapeutic_area": "Atherosclerosis NOS",
     "translational_program": "IPF",
-    "trial": "CA111-555",
-    "type": "project"
+    "trial": "CA111-555"
 })
-
-# Create a generic submission
-# https://gen3sdk-python.readthedocs.io/en/latest/submission.html
-client.submission.submit_record(json)
-
-# Fetch the presigned AWS S3 URL for downloading data via GUID
-# https://gen3sdk-python.readthedocs.io/en/latest/file.html
-download_url = client.file.get_presigned_url("dg.XXXX/e8dd1662-25d8-4c94-87f9-4c3d0e8d16e4")
-
 
 ```
