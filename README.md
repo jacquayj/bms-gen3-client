@@ -32,8 +32,6 @@ $ python setup.py install
 
 ## Usage
 
-See `Scripts/` directory for more example code.
-
 ```python
 from bms_gen3_client import Gen3Client
 
@@ -45,6 +43,9 @@ client = Gen3Client(
 
 # Fetch projects
 projects = client.fetch_projects(limit=1000, offset=0)
+
+# Raw GraphQL query using gen3.submission.Gen3Submission
+client.submission.query("{project{code}}")
 
 # Fetch object GUID by S3 URI
 guid = client.get_guid_by_s3_uri("s3://my-bucket/my-obj.txt")
@@ -82,5 +83,10 @@ client.submission.create_project("bms_open", {
     "translational_program": "IPF",
     "trial": "CA111-555"
 })
+
+# Arbitrary get, post, put, delete requests
+dictionary = client.authd_get("/api/v0/submission/_dictionary/_all").json()
+projects = client.authd_post("/api/v0/submission/graphql", json={"query":"{project{code}}"}).json()
+
 
 ```
