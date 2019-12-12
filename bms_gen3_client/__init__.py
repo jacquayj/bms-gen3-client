@@ -46,7 +46,7 @@ class Gen3Client(HTTPClient):
 
         q = '''
             {{
-                project(first:{0} offset{1}) {{
+                project(first:{0} offset:{1}) {{
                     {2}
                 }}
             }}
