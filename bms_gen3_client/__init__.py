@@ -59,7 +59,7 @@ class Gen3Client(HTTPClient):
     def get_guid_by_s3_uri(self, s3uri):
         return self.authd_get(
             "/index/_query/urls/q",
-            params=[('include', s3uri)]
+            params=[('include', s3uri), ('fast', 'true')]
         ).json()[0]["did"]
 
     def get_metdata_by_guid(self, guid):
