@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="bms-gen3-client",
-    version="0.0.4",
+    version="0.0.5",
     description="Gen3 client wrapper for HTTP basic auth and eternal API keys for BMS",
     url="https://github.com/jacquayj/bms-gen3-client", # Need to rehost at GitHub
     license="Apache",
