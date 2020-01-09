@@ -62,9 +62,8 @@ class Gen3Client(HTTPClient):
             params=[('include', s3uri), ('fast', 'true')]
         ).json()[0]["did"]
 
-    def get_metdata_by_guid(self, guid):
+    def get_metadata_by_guid(self, guid):
         return self.authd_get(
-            "/index/index/{}".format(guid),
-            auth=self.auth
+            "/index/index/{}".format(guid)
         ).json()    
     
